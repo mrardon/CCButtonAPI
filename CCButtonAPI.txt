@@ -1,10 +1,11 @@
 -- Updater Information **IGNORE**
-apiVersion = "1.0"
+apiVersion = "1.1"
  
 function version()
   return apiVersion
 end
  
+-- START OF PROGRAM
 -- Array which holds the buttons
 buttons = {}
  
@@ -34,13 +35,20 @@ function cPrint(button)
   textX = (textX1 - (string.len(buttons[button].label)/2))
  
   m.setCursorPos(textX + 1, buttons[button].y1 + (butHeight/2))
+ 
+  -- Set text color to the button-specific color
+  m.setTextColor(buttons[button].textColor)
+ 
   m.write(buttons[button].label)
+ 
+  -- Reset text color
+  m.setTextColor(colors.white)
  
 end
  
  
 -- Adds a button to the array
-function add(butName, butLabel, butMode, butX1, butY1, butX2, butY2, butColor, butSecColor, butFunc)
+function add(butName, butLabel, butMode, butX1, butY1, butX2, butY2, butColor, butSecColor, butTextColor, butFunc)
   table.insert(buttons, {
     name = butName,
     label = butLabel,
@@ -50,6 +58,7 @@ function add(butName, butLabel, butMode, butX1, butY1, butX2, butY2, butColor, b
     y2 = butY2,
     color = butColor,
     secColor = butSecColor,
+    textColor = butTextColor,
     func = butFunc,
     mode = butMode,
     toggled = ""
@@ -74,7 +83,7 @@ function getState(butName)
   end
 end
  
--- Makes a button flash its secondary color
+-- Makes a button flash between two colors
 function flash(button)
  
   --Draw the button in its secondary color
