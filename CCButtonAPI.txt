@@ -1,5 +1,5 @@
 -- Updater Information **IGNORE**
-apiVersion = "1.1"
+apiVersion = "1.2"
  
 function version()
   return apiVersion
@@ -152,7 +152,7 @@ function toggle(button)
     m.setBackgroundColor(colors.black)
    
   else
-    print("You have not defined the state of the "..buttons[button].name.." button.")
+    error("You have not defined the state of the "..buttons[button].name.." button.")
   end
  
 end
@@ -213,7 +213,7 @@ function draw()
         m.setBackgroundColor(colors.black)
        
       else
-        print("You have not defined a mode for this button.")
+        error("You have not defined a mode for this button.")
       end
     end
   end
@@ -233,7 +233,7 @@ function check()
       elseif buttons[button].mode == "toggle" then
         toggle(button)
       else
-        print("You have not defined a mode for this button.")
+        error("You have not defined a mode for this button.")
       end
  
       buttons[button].func()
